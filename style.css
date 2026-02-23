@@ -7,7 +7,6 @@
 
 body {
     background-color: black;
-    background-image: url("assets/fundo.jpg");
 
     background-repeat: no-repeat;
     background-position: center;
@@ -15,7 +14,14 @@ body {
     background-attachment: fixed;
 
     font-family: "Comic Sans MS";
-    
+}
+
+.index {
+    background-image: url("assets/fundo.jpg");    
+}
+
+.segunda-pagina {
+    background-image: url("assets/fundo2.jpg");    
 }
 
 h2 {
@@ -48,4 +54,20 @@ a {
     cursor: pointer;
     padding: 5px 30px;
     border-radius: 30px;
+ }
+
+ ol {
+    padding: 30px auto;
+    text-align: center;
+    list-style-position: inside;
+ }
+
+ li {
+    font-size: 15px;
+    font-weight: bold;
+    color: red;
+ }
+
+ .titulo-pag-2 {
+    color: blue;
  }
