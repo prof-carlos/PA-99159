@@ -1,0 +1,79 @@
+/* Importando uma fonte similar à San Francisco da Apple */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+
+.info-curso {
+    /* Cores e Fundo (Estilo Neumorphism/Glassmorphism) */
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(15px); /* Efeito de vidro fosco */
+    -webkit-backdrop-filter: blur(15px);
+    
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 22px; /* Cantos arredondados clássicos da Apple */
+    padding: 30px;
+    width: 320px;
+    
+    /* Tipografia */
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #1d1d1f; /* O cinza quase preto oficial da Apple */
+    
+    /* Sombra suave de profundidade */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.08);
+    
+    /* Transição suave (Bezier Curve para parecer natural) */
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: default;
+}
+
+.info-curso h2 {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.022em;
+    margin-bottom: 20px;
+    color: #000;
+}
+
+.info-curso p {
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 12px 0;
+    color: #86868b; /* Cinza secundário para os rótulos */
+    font-weight: 400;
+    transition: color 0.3s ease;
+}
+
+/* Para destacar os valores dinâmicos {nome}, {cargaHoraria}, etc. */
+.info-curso p span {
+    color: #1d1d1f;
+    font-weight: 500;
+    display: block; /* Estilo stack da Apple */
+    font-size: 17px;
+}
+
+/* --- EFEITOS AO PASSAR O MOUSE (HOVER) --- */
+
+.info-curso:hover {
+    /* Efeito de "levitação" sutil */
+    transform: translateY(-5px) scale(1.01);
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+.info-curso:hover h2 {
+    /* Um leve toque de cor da marca no título ao interagir */
+    color: #0071e3; /* Azul clássico da Apple */
+}
+
+.info-curso:hover p {
+    color: #515154;
+}
+
+/* Ajuste fino para telas retina */
+@media (prefers-color-scheme: dark) {
+    .info-curso {
+        background: rgba(29, 29, 31, 0.7);
+        color: #f5f5f7;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .info-curso h2, .info-curso p span { color: #fff; }
+    .info-curso p { color: #a1a1a6; }
+}

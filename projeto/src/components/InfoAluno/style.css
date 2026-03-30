@@ -1,0 +1,73 @@
+/* Importando uma fonte robusta para o estilo Marvel */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;700&display=swap');
+
+.info-aluno {
+    background-color: #1a1a1a; /* Fundo escuro estilo Stark Industries */
+    color: #ffffff;
+    border: 5px solid #ed1d24; /* Vermelho clássico da Marvel */
+    padding: 25px;
+    width: 320px;
+    border-radius: 2px; /* Bordas mais secas como quadros de HQ */
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 8px 8px 0px #000; /* Sombra sólida de quadrinhos */
+    cursor: pointer;
+}
+
+/* Título estilizado como o logo da Marvel */
+.info-aluno h2 {
+    background-color: #ed1d24;
+    color: white;
+    padding: 5px 10px;
+    display: inline-block;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    letter-spacing: -1px;
+    transform: skew(-5deg); /* Inclinação dinâmica */
+}
+
+.info-aluno p {
+    font-family: 'Roboto', sans-serif;
+    margin: 12px 0;
+    font-weight: bold;
+    border-left: 3px solid #ed1d24;
+    padding-left: 10px;
+    transition: transform 0.3s ease;
+}
+
+/* --- EFEITOS AO PASSAR O MOUSE (HOVER) --- */
+
+.info-aluno:hover {
+    transform: scale(1.05) translateY(-5px);
+    box-shadow: 15px 15px 25px rgba(237, 29, 36, 0.4);
+    border-color: #fff; /* O brilho do herói */
+}
+
+/* Efeito de brilho "energético" passando por trás */
+.info-aluno::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.info-aluno:hover::before {
+    left: 100%;
+}
+
+.info-aluno:hover p {
+    transform: translateX(10px);
+    color: #ed1d24; /* Os dados se destacam no hover */
+}
