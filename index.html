@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade Prática: API RESTful NexusStore</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --background: #f8fafc;
+            --text-color: #334155;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --success: #16a34a;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        header {
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin: 0 0 10px 0;
+            font-size: 2.2rem;
+        }
+
+        .badge {
+            background-color: #dbeafe;
+            color: var(--secondary-color);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        h2 {
+            color: var(--secondary-color);
+            margin-top: 30px;
+            border-left: 4px solid var(--primary-color);
+            padding-left: 10px;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        .context-box {
+            background-color: #f0fdf4;
+            border-left: 4px solid var(--success);
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 20px 0;
+        }
+
+        .context-box h3 {
+            margin-top: 0;
+            color: #14532d;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            color: var(--text-color);
+        }
+
+        code {
+            background-color: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            color: #db2777;
+        }
+
+        .methods-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .methods-list li {
+            margin-bottom: 8px;
+            padding-left: 24px;
+            position: relative;
+        }
+
+        .methods-list li::before {
+            content: "✓";
+            color: var(--success);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .todo-list {
+            background: #fafafa;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .todo-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .todo-item input {
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #64748b;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">PROJETO PRÁTICO • BACKEND</span>
+        <h1>Desenvolvimento de API REST para a NexusStore</h1>
+        <p><strong>Objetivo:</strong> Aplicar os conceitos de rotas, verbos HTTP e manipulação de dados (CRUD) construindo uma API comercial.</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>1. O Cenário (Demanda Real)</h2>
+            <div class="context-box">
+                <h3>Contexto do Cliente</h3>
+                <p>A <strong>NexusStore</strong>, uma rede regional de lojas de departamentos, está passando por um processo de transformação digital. Até então, o controle de clientes, colaboradores e estoque era feito de forma isolada em planilhas eletrônicas, gerando perda de dados e furos de estoque.</p>
+                <p>Você foi contratado(a) como Software Engineer para desenvolver a <strong>API Core</strong> do novo sistema ERP deles. Essa API será a base para o funcionamento do aplicativo mobile dos vendedores e do painel web da diretoria. Sua missão nesta etapa é criar os endpoints iniciais para gerenciar o ecossistema da empresa.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>2. Requisitos de Dados (Modelos)</h2>
+            <p>Sua API deve ser capaz de receber, armazenar (em memória ou banco de dados) e processar as seguintes entidades com seus respectivos campos:</p>
+            
+            <h3>📋 Clientes</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Campo</th>
+                        <th>Tipo Esperado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>nome</code></td><td>Texto (String)</td></tr>
+                    <tr><td><code>email</code></td><td>Texto (String)</td></tr>
+                    <tr><td><code>telefone</code></td><td>Texto (String)</td></tr>
+                    <tr><td><code>cpf</code></td><td>Texto (String)</td></tr>
+                </tbody>
+            </table>
+
+            <h3>📋 Funcionários</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Campo</th>
+                        <th>Tipo Esperado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>nome</code></td><td>Texto (String)</td></tr>
+                    <tr><td><code>telefone</code></td><td>Texto (String)</td></tr>
+                    <tr><td><code>email</code></td><td>Texto (String)</td></tr>
+                    <tr><td><code>cargo</code></td><td>Texto (String)</td></tr>
+                    <tr><td><code>setor</code></td><td>Texto (String)</td></tr>
+                </tbody>
+            </table>
+
+            <h3>📋 Produtos</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Campo</th>
+                        <th>Tipo Esperado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>nome</code></td><td>Texto (String)</td></tr>
+                    <tr><td><code>lote</code></td><td>Texto ou Número</td></tr>
+                    <tr><td><code>quantidade</code></td><td>Número Inteiro</td></tr>
+                    <tr><td><code>preco</code></td><td>Número (Decimal/Float)</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>3. Operações Obrigatórias (CRUD)</h2>
+            <p>Para as <strong>três rotas</strong> base (<code>/clientes</code>, <code>/funcionarios</code> e <code>/produtos</code>), você deve obrigatoriamente implementar as seguintes ações utilizando as boas práticas dos métodos HTTP:</p>
+            
+            <ul class="methods-list">
+                <li><strong>GET</strong> - Listar todos os registros da entidade.</li>
+                <li><strong>GET por ID</strong> - Buscar um único registro através de um identificador único (ex: <code>/clientes/:id</code>).</li>
+                <li><strong>POST</strong> - Cadastrar um novo registro.</li>
+                <li><strong>PUT</strong> - Atualizar todos os dados de um registro existente através do ID.</li>
+                <li><strong>DELETE</strong> - Remover um registro do sistema através do ID.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>4. Checklist de Autoavaliação</h2>
+            <p>Use a lista abaixo para garantir que você cobriu todas as entregas necessárias antes de enviar o projeto:</p>
+            
+            <div class="todo-list">
+                <div class="todo-item">
+                    <input type="checkbox" id="t1">
+                    <label for="t1">Criei a rota <code>/clientes</code> com os 5 métodos HTTP funcionando e validando os 4 campos obrigatórios.</label>
+                </div>
+                <div class="todo-item">
+                    <input type="checkbox" id="t2">
+                    <label for="t2">Criei a rota <code>/funcionarios</code> com os 5 métodos HTTP funcionando e os campos de cargo/setor.</label>
+                </div>
+                <div class="todo-item">
+                    <input type="checkbox" id="t3">
+                    <label for="t3">Criei a rota <code>/produtos</code> com os 5 métodos HTTP funcionando, usando tipos numéricos para quantidade e preço.</label>
+                </div>
+                <div class="todo-item">
+                    <input type="checkbox" id="t4">
+                    <label for="t4">A API responde com os Status Codes corretos (ex: 201 para Created, 200 para OK, 404 para Not Found).</label>
+                </div>
+                <div class="todo-item">
+                    <input type="checkbox" id="t5">
+                    <label for="t5">Testei as rotas utilizando uma ferramenta de requisições (Postman, Insomnia ou extensão Thunder Client).</label>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>💡 Dica do Tutor</h2>
+            <blockquote>
+                <em>"Lembre-se de gerar um ID único automaticamente no momento do <code>POST</code> (pode ser um contador incremental ou um UUID) para que as operações de busca por ID, exclusão e atualização funcionem perfeitamente nas etapas seguintes!"</em>
+            </blockquote>
+        </section>
+    </main>
+
+    <footer>
+        <p>Bons estudos! A arquitetura REST é um pilar fundamental no desenvolvimento backend moderno.</p>
+    </footer>
+</div>
+
+</body>
+</html>
